@@ -39,10 +39,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val burg = LatLng(37.229676, -80.423370)
+        val ncb = LatLng(37.22955757387947, -80.42696695587784)
+        val surge = LatLng(37.233194976104734, -80.42303508448178)
+        val mcb = LatLng(37.23106324116719, -80.42174318388022)
+        val goodwin = LatLng(37.23265832123776, -80.4256937784734)
+        val torg = LatLng(37.22980391219889, -80.42020954188546)
+        mMap.addMarker(MarkerOptions().position(ncb).title("New Classroom Building"))
+        mMap.addMarker(MarkerOptions().position(surge).title("Surge"))
+        mMap.addMarker(MarkerOptions().position(mcb).title("McBryde"))
+        mMap.addMarker(MarkerOptions().position(goodwin).title("Goodwin"))
+        mMap.addMarker(MarkerOptions().position(torg).title("Torgersen"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(burg, 16f));
     }
 }
