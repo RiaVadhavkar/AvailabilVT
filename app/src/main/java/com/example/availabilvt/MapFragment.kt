@@ -1,59 +1,84 @@
 package com.example.availabilvt
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MapFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MapFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+class MapFragment : Fragment(), OnMapReadyCallback {
+    var mapView: MapView? = null
+    var map: GoogleMap? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_map, container, false)
+        var view = inflater.inflate(R.layout.fragment_map, container, false)
+
+        mapView = view.findViewById(R.id.mapView) as MapView
+        mapView!!.onCreate(savedInstanceState)
+        mapView!!.getMapAsync(this)
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MapFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MapFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onResume() {
+        super.onResume()
+        mapView?.onResume()
     }
+
+    override fun onPause() {
+        super.onPause()
+        mapView?.onPause()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mapView?.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mapView?.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView?.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView?.onLowMemory()
+    }
+
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        MapsInitializer.initialize(requireContext())
+        map = googleMap
+        val burg = LatLng(37.229676, -80.423370)
+        val ncb = LatLng(37.22955757387947, -80.42696695587784)
+        val surge = LatLng(37.233194976104734, -80.42303508448178)
+        val mcb = LatLng(37.23106324116719, -80.42174318388022)
+        val goodwin = LatLng(37.23265832123776, -80.4256937784734)
+        val torg = LatLng(37.22980391219889, -80.42020954188546)
+        map!!.addMarker(MarkerOptions().position(ncb).title("NCB"))
+        map!!.addMarker(MarkerOptions().position(surge).title("Surge"))
+        map!!.addMarker(MarkerOptions().position(mcb).title("McBryde"))
+        map!!.addMarker(MarkerOptions().position(goodwin).title("Goodwin"))
+        map!!.addMarker(MarkerOptions().position(torg).title("Torgersen"))
+        map!!.moveCamera(CameraUpdateFactory.newLatLngZoom(burg, 16f));
+
+        map!!.setOnMarkerClickListener { marker ->
+            findNavController().navigate(R.id.action_mapFragment_to_scheduleFragment)
+            true
+        }
+    }
+
 }

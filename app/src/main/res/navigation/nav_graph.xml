@@ -6,6 +6,20 @@
     app:startDestination="@id/mapFragment">
 
     <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="com.example.availabilvt.ScheduleFragment"
+        android:label="fragment_schedule"
+        tools:layout="@layout/fragment_schedule" >
+        <action
+            android:id="@+id/action_scheduleFragment_to_availabilityFragment"
+            app:destination="@id/availabilityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/availabilityFragment"
+        android:name="com.example.availabilvt.AvailabilityFragment"
+        android:label="fragment_availability"
+        tools:layout="@layout/fragment_availability" />
+    <fragment
         android:id="@+id/mapFragment"
         android:name="com.example.availabilvt.MapFragment"
         android:label="fragment_map"
@@ -14,9 +28,4 @@
             android:id="@+id/action_mapFragment_to_scheduleFragment"
             app:destination="@id/scheduleFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/scheduleFragment"
-        android:name="com.example.availabilvt.ScheduleFragment"
-        android:label="fragment_schedule"
-        tools:layout="@layout/fragment_schedule" />
 </navigation>
