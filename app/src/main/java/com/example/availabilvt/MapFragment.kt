@@ -58,7 +58,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         mapView?.onLowMemory()
     }
 
-
     override fun onMapReady(googleMap: GoogleMap) {
         MapsInitializer.initialize(requireContext())
         map = googleMap
