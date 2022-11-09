@@ -52,7 +52,7 @@
         android:layout_marginTop="15dp"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
-        android:text="When: DD/MM/YYYY, XX:XX - XX:XX"
+        android:text="When: MM/DD/YYYY, XX:XX - XX:XX"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
