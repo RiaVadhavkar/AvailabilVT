@@ -27,7 +27,7 @@
         android:layout_marginTop="15dp"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
-        android:text="Building: McBryde"
+        android:text="Building: Building"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
@@ -39,8 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="250dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/timeStartSpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,12 +49,13 @@
         android:id="@+id/timeStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="150dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="100dp"
         android:fontFamily="sans-serif-black"
         android:text="Time Start"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.395"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buildingImage" />
 
@@ -79,13 +78,13 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="100dp"
         android:fontFamily="sans-serif-black"
         android:text="Date"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintHorizontal_bias="0.408"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeEnd" />
 
@@ -99,34 +98,42 @@
         android:text="Particpants"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.403"
+        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date" />
 
-    <Spinner
-        android:id="@+id/timeStartSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <EditText
+        android:id="@+id/startTime"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
         android:layout_marginStart="230dp"
         android:layout_marginTop="20dp"
-        android:minHeight="48dp"
+        android:ems="10"
+        android:focusable="false"
+        android:gravity="center"
+        android:inputType="none"
+        android:timePickerMode="spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.203"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buildingImage"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <Spinner
-        android:id="@+id/timeEndSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <EditText
+        android:id="@+id/endTime"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
         android:layout_marginStart="230dp"
-        android:layout_marginTop="7dp"
-        android:minHeight="48dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:focusable="false"
+        android:gravity="center"
+        android:inputType="none"
+        android:timePickerMode="spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.203"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeStartSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/startTime"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
@@ -138,11 +145,11 @@
         android:ems="10"
         android:focusable="false"
         android:gravity="center"
-        android:inputType="date"
+        android:inputType="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeEndSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/endTime"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText

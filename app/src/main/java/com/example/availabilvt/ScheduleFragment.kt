@@ -1,24 +1,19 @@
 package com.example.availabilvt
 
-import android.media.Image
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
-import androidx.navigation.fragment.findNavController
-import com.google.android.gms.maps.MapView
-import android.app.DatePickerDialog
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import java.util.*
-import java.util.Calendar;
-import android.app.TimePickerDialog;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
 
 
 class ScheduleFragment : Fragment() {
@@ -30,11 +25,58 @@ class ScheduleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.fragment_schedule, container, false)
-        var img = view.findViewById(R.id.buildingImage) as ImageView
+        var building = view.findViewById(R.id.buildingName) as TextView
+        var image = view.findViewById(R.id.buildingImage) as ImageView
+        var startTime = view.findViewById(R.id.startTime) as EditText
+        var endTime = view.findViewById(R.id.endTime) as EditText
         var date = view.findViewById(R.id.datePicker) as EditText
         val button = view.findViewById(R.id.submitButton) as Button
 
-        img.setImageResource(R.drawable.mcbryde)
+        building.setText("Building: McBryde")
+        image.setImageResource(R.drawable.mcbryde)
+
+
+        startTime.setOnClickListener {
+            val calendar = Calendar.getInstance()
+
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
+
+            val timePickerDialog = TimePickerDialog(
+                view.getContext(),
+                { view, hourOfDay, minute ->
+                    calendar.set(Calendar.MINUTE, minute)
+                    calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                    var time = SimpleDateFormat("HH:mm").format(calendar.time)
+                    startTime.setText(time)
+                },
+                hour,
+                minute,
+                false
+            )
+            timePickerDialog.show()
+        }
+
+        endTime.setOnClickListener {
+            val calendar = Calendar.getInstance()
+
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
+
+            val timePickerDialog = TimePickerDialog(
+                view.getContext(),
+                { view, hourOfDay, minute ->
+                    calendar.set(Calendar.MINUTE, minute)
+                    calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                    var time = SimpleDateFormat("HH:mm").format(calendar.time)
+                    endTime.setText(time)
+                },
+                hour,
+                minute,
+                false
+            )
+            timePickerDialog.show()
+        }
 
         date!!.setOnClickListener {
 
