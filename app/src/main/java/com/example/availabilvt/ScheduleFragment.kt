@@ -25,6 +25,7 @@ class ScheduleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.fragment_schedule, container, false)
+
         var building = view.findViewById(R.id.buildingName) as TextView
         var image = view.findViewById(R.id.buildingImage) as ImageView
         var startTime = view.findViewById(R.id.startTime) as EditText
