@@ -4,7 +4,7 @@ package com.example.availabilvt
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class MapViewModel () : ViewModel( ){
+class MapViewModel : ViewModel(){
     private var markerSelectedLiveData = MutableLiveData<String>()
     private var markerSelected = ""
 

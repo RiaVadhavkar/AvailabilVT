@@ -15,13 +15,14 @@ import com.google.android.gms.maps.model.MarkerOptions
 class MapFragment : Fragment(), OnMapReadyCallback {
     var mapView: MapView? = null
     var map: GoogleMap? = null
+    lateinit var viewModel: MapViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.fragment_map, container, false)
-        val viewModel = ViewModelProvider(requireActivity()).get(MapViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(MapViewModel::class.java)
 
         mapView = view.findViewById(R.id.mapView) as MapView
         mapView!!.onCreate(savedInstanceState)
@@ -77,22 +78,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         map!!.moveCamera(CameraUpdateFactory.newLatLngZoom(burg, 16f));
 
         map!!.setOnMarkerClickListener { marker ->
-            if (marker.title == "NCB"){
-
-            }
-            else if (marker.title == "Surge") {
-
-            }
-            else if (marker.title == "McBryde") {
-
-            }
-            else if (marker.title == "Goodwin") {
-
-            }
-            else if (marker.title == "Torgersen") {
-
-            }
-
+            viewModel.setMarker(marker.title!!)
             findNavController().navigate(R.id.action_mapFragment_to_scheduleFragment)
             true
         }

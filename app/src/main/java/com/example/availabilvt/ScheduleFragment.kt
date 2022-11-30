@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import java.util.*
 
@@ -25,6 +28,8 @@ class ScheduleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.fragment_schedule, container, false)
+        val viewModel = ViewModelProvider(requireActivity()).get(MapViewModel::class.java)
+        val markerChoice = viewModel.getMarker()
 
         var building = view.findViewById(R.id.buildingName) as TextView
         var image = view.findViewById(R.id.buildingImage) as ImageView
@@ -34,9 +39,20 @@ class ScheduleFragment : Fragment() {
         val button = view.findViewById(R.id.submitButton) as Button
 
 
+        markerChoice!!.observe(viewLifecycleOwner, Observer { s ->
+            building.text = "Building: " + s
 
-        building.setText("Building: McBryde")
-        image.setImageResource(R.drawable.mcbryde)
+            when (s){
+                "NCB" -> image.setImageResource(R.drawable.ncb)
+                "Surge" -> image.setImageResource(R.drawable.surge)
+                "McBryde" -> image.setImageResource(R.drawable.mcbryde)
+                "Goodwin" -> image.setImageResource(R.drawable.goodwin)
+                "Torgersen" -> image.setImageResource(R.drawable.torg)
+                else -> Log.d("test", "failure")
+            }
+        })
+
+
 
 
         startTime.setOnClickListener {
