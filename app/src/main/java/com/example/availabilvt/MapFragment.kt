@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
@@ -20,6 +21,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.fragment_map, container, false)
+        val viewModel = ViewModelProvider(requireActivity()).get(MapViewModel::class.java)
 
         mapView = view.findViewById(R.id.mapView) as MapView
         mapView!!.onCreate(savedInstanceState)
@@ -75,6 +77,22 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         map!!.moveCamera(CameraUpdateFactory.newLatLngZoom(burg, 16f));
 
         map!!.setOnMarkerClickListener { marker ->
+            if (marker.title == "NCB"){
+
+            }
+            else if (marker.title == "Surge") {
+
+            }
+            else if (marker.title == "McBryde") {
+
+            }
+            else if (marker.title == "Goodwin") {
+
+            }
+            else if (marker.title == "Torgersen") {
+
+            }
+
             findNavController().navigate(R.id.action_mapFragment_to_scheduleFragment)
             true
         }

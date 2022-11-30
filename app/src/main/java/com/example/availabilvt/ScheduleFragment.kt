@@ -33,6 +33,8 @@ class ScheduleFragment : Fragment() {
         var date = view.findViewById(R.id.datePicker) as EditText
         val button = view.findViewById(R.id.submitButton) as Button
 
+
+
         building.setText("Building: McBryde")
         image.setImageResource(R.drawable.mcbryde)
 
