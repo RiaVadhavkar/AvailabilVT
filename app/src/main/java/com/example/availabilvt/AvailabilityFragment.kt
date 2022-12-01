@@ -1,6 +1,7 @@
 package com.example.availabilvt
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +27,21 @@ class AvailabilityFragment : Fragment() {
     ): View? {
 
         var view = inflater.inflate(R.layout.fragment_availability, container, false)
+        val viewModel = ViewModelProvider(requireActivity()).get(MapViewModel::class.java)
+
+        val markerChoice = viewModel.getMarker()
+        val timeStart = viewModel.getStart()
+        val timeEnd = viewModel.getEnd()
+        val date = viewModel.getDate()
+        val part = viewModel.getPart()
+
+        var building = view.findViewById(R.id.location) as TextView
+
+
+        markerChoice!!.observe(viewLifecycleOwner, Observer { s ->
+            building.text = "Where: " + s
+        })
+
 
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
