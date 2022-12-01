@@ -23,13 +23,11 @@ class RecyclerViewAdapter(private val cnt: Int) :
     override fun getItemCount() = cnt
 
     class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view){
-        var buildingText: TextView
         var participantsText: TextView
         var availabilityText: TextView
         var timeText: TextView
 
         init {
-            buildingText = view.findViewById(R.id.buildingName)
             participantsText = view.findViewById(R.id.participants)
             availabilityText = view.findViewById(R.id.availability)
             timeText = view.findViewById(R.id.time)

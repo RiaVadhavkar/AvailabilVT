@@ -35,13 +35,36 @@ class AvailabilityFragment : Fragment() {
         val date = viewModel.getDate()
         val part = viewModel.getPart()
 
+        var timeStartVariable = ""
+        var timeEndVariable = ""
+        var dateVariable = ""
+        var partVariable = ""
+
+
         var building = view.findViewById(R.id.location) as TextView
+        var dateTime = view.findViewById(R.id.dateTime) as TextView
 
 
         markerChoice!!.observe(viewLifecycleOwner, Observer { s ->
             building.text = "Where: " + s
         })
 
+        timeStart!!.observe(viewLifecycleOwner, Observer { s ->
+            timeStartVariable = s
+        })
+
+        timeEnd!!.observe(viewLifecycleOwner, Observer { s ->
+            timeEndVariable = s
+        })
+
+        date!!.observe(viewLifecycleOwner, Observer { s ->
+            dateVariable = s
+        })
+
+        part!!.observe(viewLifecycleOwner, Observer { s ->
+            partVariable = s
+            dateTime.text = "When: " + dateVariable + ", " + timeStartVariable + " - " + timeEndVariable
+        })
 
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
