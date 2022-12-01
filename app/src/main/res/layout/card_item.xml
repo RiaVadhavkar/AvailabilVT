@@ -19,13 +19,27 @@
         android:layout_height="wrap_content">
 
 
+<!--        <TextView-->
+<!--            android:id="@+id/buildingName"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="sans-serif-black"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Building Name"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textSize="18sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
         <TextView
-            android:id="@+id/buildingName"
+            android:id="@+id/participants"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-black"
             android:gravity="center"
-            android:text="Building Name"
+            android:text="Particpants: 00"
             android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,29 +47,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/participants"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif"
-            android:gravity="center"
-            android:text="Particpants: 00"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buildingName" />
-
-        <TextView
             android:id="@+id/availability"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif"
+            android:fontFamily="sans-serif-black"
             android:gravity="center"
             android:text="Availability"
             android:textAlignment="center"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/participants" />
