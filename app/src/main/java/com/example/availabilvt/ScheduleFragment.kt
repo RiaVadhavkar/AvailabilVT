@@ -19,12 +19,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 
 class ScheduleFragment : Fragment() {
 
-//    lateinit var date: EditText
+    lateinit var database: FirebaseDatabase
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +42,8 @@ class ScheduleFragment : Fragment() {
         val viewModel = ViewModelProvider(requireActivity()).get(MapViewModel::class.java)
         val markerChoice = viewModel.getMarker()
 
+        database = Firebase.database
+
         var building = view.findViewById(R.id.buildingName) as TextView
         var image = view.findViewById(R.id.buildingImage) as ImageView
         var startTime = view.findViewById(R.id.startTime) as EditText
@@ -41,16 +51,28 @@ class ScheduleFragment : Fragment() {
         var date = view.findViewById(R.id.datePicker) as EditText
         val button = view.findViewById(R.id.submitButton) as Button
         val participants = view.findViewById(R.id.participants) as EditText
+        var buildingName = ""
+        var participantsAmount = ""
+
+        fun writeNewItem(building: String, date: String, timeStart: String,
+                         timeEnd: String, participants: String) {
+            val item = TrackerObject(building, date, timeStart, timeEnd, participants)
+            val myRef = database.reference
+            val calendar = Calendar.getInstance()
+            myRef.child(android.icu.text.SimpleDateFormat("HH:mm:ss").format(calendar.time)).setValue(item)
+
+        }
 
         markerChoice!!.observe(viewLifecycleOwner, Observer { s ->
             building.text = "Building: " + s
-
+            buildingName = s
             when (s){
                 "NCB" -> image.setImageResource(R.drawable.ncb)
                 "Surge" -> image.setImageResource(R.drawable.surge)
                 "McBryde" -> image.setImageResource(R.drawable.mcbryde)
                 "Goodwin" -> image.setImageResource(R.drawable.goodwin)
                 "Torgersen" -> image.setImageResource(R.drawable.torg)
+
                 else -> Log.d("test", "failure")
             }
         })
@@ -124,6 +146,7 @@ class ScheduleFragment : Fragment() {
         }
 
         button.setOnClickListener {
+            writeNewItem(buildingName, date.text.toString(), startTime.text.toString(), endTime.text.toString(), participantsAmount)
             findNavController().navigate(R.id.action_scheduleFragment_to_availabilityFragment)
         }
 
@@ -138,6 +161,7 @@ class ScheduleFragment : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int,before: Int, count: Int) {
+                participantsAmount = s.toString()
                 viewModel.setPart(s.toString())
             }
 

@@ -11,6 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -31,36 +34,38 @@ class AvailabilityFragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_availability, container, false)
         val viewModel = ViewModelProvider(requireActivity()).get(MapViewModel::class.java)
 
+
+
         ///////////
-        classes.add(Classroom("McBryde", "100", mutableListOf("7:00 - 9:00", "12:30 - 13:30"), mutableListOf("Monday", "Wednesday", "Friday") ,6043))
-        classes.add(Classroom("McBryde", "113", mutableListOf("11:30 - 13:30"), mutableListOf("Tuesday", "Thursday") ,1634))
-        classes.add(Classroom("McBryde", "126", mutableListOf("8:00 - 9:00", "15:00 - 17:30"), mutableListOf("Monday", "Wednesday", "Friday") ,926))
-        classes.add(Classroom("McBryde", "129", mutableListOf("12:30 - 15:00"), mutableListOf("Tuesday", "Thursday") ,1631))
-        classes.add(Classroom("McBryde", "134", mutableListOf("10:00 - 12:00", "16:30 - 18:00"), mutableListOf("Tuesday", "Thursday") ,619))
+        classes.add(Classroom("McBryde", "100", "7:00", "9:00", mutableListOf("Monday", "Wednesday", "Friday") ,6043))
+        classes.add(Classroom("McBryde", "113", "11:30", "13:30", mutableListOf("Tuesday", "Thursday") ,1634))
+        classes.add(Classroom("McBryde", "126", "8:00", "9:00", mutableListOf("Monday", "Wednesday", "Friday") ,926))
+        classes.add(Classroom("McBryde", "129", "12:30", "15:00", mutableListOf("Tuesday", "Thursday") ,1631))
+        classes.add(Classroom("McBryde", "134", "16:30", "18:00", mutableListOf("Tuesday", "Thursday") ,619))
 
-        classes.add(Classroom("NCB", "110A", mutableListOf("7:00 - 9:00", "12:30 - 13:30"), mutableListOf("Monday", "Wednesday", "Friday") ,1197))
-        classes.add(Classroom("NCB", "110B", mutableListOf("11:30 - 13:30"), mutableListOf("Tuesday", "Thursday") ,1228))
-        classes.add(Classroom("NCB", "120", mutableListOf("8:00 - 9:00", "15:00 - 17:30"), mutableListOf("Monday", "Wednesday", "Friday") ,2388))
-        classes.add(Classroom("NCB", "130A", mutableListOf("12:30 - 15:00"), mutableListOf("Tuesday", "Thursday") ,1188))
-        classes.add(Classroom("NCB", "160", mutableListOf("10:00 - 12:00", "16:30 - 18:00"), mutableListOf("Tuesday", "Thursday") ,3086))
+        classes.add(Classroom("NCB", "110A", "12:30", "13:30", mutableListOf("Monday", "Wednesday", "Friday") ,1197))
+        classes.add(Classroom("NCB", "110B", "11:30", "13:30", mutableListOf("Tuesday", "Thursday") ,1228))
+        classes.add(Classroom("NCB", "120", "15:00", "17:30", mutableListOf("Monday", "Wednesday", "Friday") ,2388))
+        classes.add(Classroom("NCB", "130A", "12:30", "15:00", mutableListOf("Tuesday", "Thursday") ,1188))
+        classes.add(Classroom("NCB", "160", "10:00",  "12:00", mutableListOf("Tuesday", "Thursday") ,3086))
 
-        classes.add(Classroom("Surge", "103A", mutableListOf("7:00 - 9:00", "12:30 - 13:30"), mutableListOf("Monday", "Wednesday", "Friday") ,1404))
-        classes.add(Classroom("Surge", "104A", mutableListOf("11:30 - 13:30"), mutableListOf("Tuesday", "Thursday") ,1660))
-        classes.add(Classroom("Surge", "104B", mutableListOf("8:00 - 9:00", "15:00 - 17:30"), mutableListOf("Monday", "Wednesday", "Friday") ,2335))
-        classes.add(Classroom("Surge", "104C", mutableListOf("12:30 - 15:00"), mutableListOf("Tuesday", "Thursday") ,2334))
-        classes.add(Classroom("Surge", "104D", mutableListOf("10:00 - 12:00", "16:30 - 18:00"), mutableListOf("Tuesday", "Thursday") ,1573))
+        classes.add(Classroom("Surge", "103A", "12:30", "13:30", mutableListOf("Monday", "Wednesday", "Friday") ,1404))
+        classes.add(Classroom("Surge", "104A", "11:30", "13:30", mutableListOf("Tuesday", "Thursday") ,1660))
+        classes.add(Classroom("Surge", "104B", "8:00", "9:00", mutableListOf("Monday", "Wednesday", "Friday") ,2335))
+        classes.add(Classroom("Surge", "104C", "12:30", "15:00", mutableListOf("Tuesday", "Thursday") ,2334))
+        classes.add(Classroom("Surge", "104D", "16:30", "18:00", mutableListOf("Tuesday", "Thursday") ,1573))
 
-        classes.add(Classroom("Goodwin", "115", mutableListOf("7:00 - 9:00", "12:30 - 13:30"), mutableListOf("Monday", "Wednesday", "Friday") ,1764))
-        classes.add(Classroom("Goodwin", "125", mutableListOf("11:30 - 13:30"), mutableListOf("Tuesday", "Thursday") ,1876))
-        classes.add(Classroom("Goodwin", "135", mutableListOf("8:00 - 9:00", "15:00 - 17:30"), mutableListOf("Monday", "Wednesday", "Friday") ,1874))
-        classes.add(Classroom("Goodwin", "145", mutableListOf("12:30 - 15:00"), mutableListOf("Tuesday", "Thursday") ,1451))
-        classes.add(Classroom("Goodwin", "155", mutableListOf("10:00 - 12:00", "16:30 - 18:00"), mutableListOf("Tuesday", "Thursday") ,1446))
+        classes.add(Classroom("Goodwin", "115", "7:00", "13:30", mutableListOf("Monday", "Wednesday", "Friday") ,1764))
+        classes.add(Classroom("Goodwin", "125", "11:30",  "14:30", mutableListOf("Tuesday", "Thursday") ,1876))
+        classes.add(Classroom("Goodwin", "135", "8:00",  "17:30", mutableListOf("Monday", "Wednesday", "Friday") ,1874))
+        classes.add(Classroom("Goodwin", "145", "12:30", "15:00", mutableListOf("Tuesday", "Thursday") ,1451))
+        classes.add(Classroom("Goodwin", "155", "10:00", "12:00", mutableListOf("Tuesday", "Thursday") ,1446))
 
-        classes.add(Classroom("Torgersen", "1010", mutableListOf("7:00 - 9:00", "12:30 - 13:30"), mutableListOf("Monday", "Wednesday", "Friday") ,1404))
-        classes.add(Classroom("Torgersen", "1030", mutableListOf("11:30 - 13:30"), mutableListOf("Tuesday", "Thursday") ,1660))
-        classes.add(Classroom("Torgersen", "1060", mutableListOf("8:00 - 9:00", "15:00 - 17:30"), mutableListOf("Monday", "Wednesday", "Friday") ,2335))
-        classes.add(Classroom("Torgersen", "2150", mutableListOf("12:30 - 15:00"), mutableListOf("Tuesday", "Thursday") ,2334))
-        classes.add(Classroom("Torgersen", "3100", mutableListOf("10:00 - 12:00", "16:30 - 18:00"), mutableListOf("Tuesday", "Thursday") ,1573))
+        classes.add(Classroom("Torgersen", "1010", "7:00", "13:30", mutableListOf("Monday", "Wednesday", "Friday") ,1404))
+        classes.add(Classroom("Torgersen", "1030", "11:30","13:30", mutableListOf("Tuesday", "Thursday") ,1660))
+        classes.add(Classroom("Torgersen", "1060", "8:00", "9:00", mutableListOf("Monday", "Wednesday", "Friday") ,2335))
+        classes.add(Classroom("Torgersen", "2150", "12:30", "15:00", mutableListOf("Tuesday", "Thursday") ,2334))
+        classes.add(Classroom("Torgersen", "3100", "16:30", "18:00", mutableListOf("Tuesday", "Thursday") ,1573))
 
         ///////////
         val markerChoice = viewModel.getMarker()
@@ -125,7 +130,7 @@ class AvailabilityFragment : Fragment() {
         }
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.view.findViewById<TextView>(R.id.room).text = "Room: " + classes[position].room
-            holder.view.findViewById<TextView>(R.id.time).text = classes[position].time.toString()
+            holder.view.findViewById<TextView>(R.id.time).text = classes[position].timeStart + " - " + classes[position].timeEnd
             holder.view.findViewById<TextView>(R.id.participants).text = "Particpants: " + classes[position].space
 
         }
@@ -140,9 +145,11 @@ class AvailabilityFragment : Fragment() {
             val simpleDateFormat = SimpleDateFormat("EEEE")
             val dayName: String = simpleDateFormat.format(myDate)
 
+            classes = classes.filter{ m -> m.daysOfTheWeek.toString().contains(dayName, ignoreCase = true)}.toMutableList()
 
+            classes = classes.filter{ m-> m.timeStart.replace(":", "").toInt() <= timeStart.replace(":", "").toInt() }.toMutableList()
+            classes = classes.filter{ m-> m.timeEnd.replace(":", "").toInt() >= timeEnd.replace(":", "").toInt() }.toMutableList()
 
-            //classes = classes.filter{ m -> m.space >= part.toInt()}.toMutableList()
             cnt = classes.size
             notifyDataSetChanged()
 
