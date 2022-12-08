@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "262823025553",
-    "project_id": "hw05-ethanria",
-    "storage_bucket": "hw05-ethanria.appspot.com"
+    "project_number": "718872283662",
+    "firebase_url": "https://availabilvt-default-rtdb.firebaseio.com",
+    "project_id": "availabilvt",
+    "storage_bucket": "availabilvt.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:262823025553:android:aa02e46d2884f2fb80d830",
+        "mobilesdk_app_id": "1:718872283662:android:f2d1bd3f2ab5fcf9290a5f",
         "android_client_info": {
-          "package_name": "com.example.hw05"
+          "package_name": "com.example.availabilvt"
         }
       },
       "oauth_client": [
         {
-          "client_id": "262823025553-65c7cnpq256ov2a278sttoooelefuua9.apps.googleusercontent.com",
+          "client_id": "718872283662-nvusq3nguql7bp70i4bmv460obcmg83v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB1De3RKDQ1_alEfb1WEAZAfATwioyZ0LQ"
+          "current_key": "AIzaSyAh18J0f_Lp2R0CjOFD4o8PNqebktR1NfQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "262823025553-65c7cnpq256ov2a278sttoooelefuua9.apps.googleusercontent.com",
+              "client_id": "718872283662-nvusq3nguql7bp70i4bmv460obcmg83v.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
